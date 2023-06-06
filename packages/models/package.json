@@ -1,0 +1,30 @@
+{
+  "author": "Kael Shawn <kaelshawn@outlook.com>",
+  "bugs": {
+    "url": "https://github.com/kaelshawn/monorepo-nx-rollup-nextjs-starter/issues"
+  },
+  "description": "> TODO: description",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/kaelshawn/monorepo-nx-rollup-nextjs-starter#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "name": "models",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaelshawn/monorepo-nx-rollup-nextjs-starter.git"
+  },
+  "scripts": {
+    "dev": "pnpm run tsc  --watch",
+    "test": "node ./__tests__/models.test.js",
+    "tsc": "tsc"
+  },
+  "type": "module",
+  "version": "0.0.0"
+}
