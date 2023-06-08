@@ -1,3 +1,6 @@
+import { Button } from "primereact/button";
+import { Dropdown } from "primereact/dropdown";
+import { InputText } from "primereact/inputtext";
 import React from "react";
 import { sendOTP } from "../utils/otp-utils";
 import styles from "./send-otp-form.module.scss";
@@ -15,7 +18,7 @@ const SendOTPForm = (props: Props): JSX.Element => {
 
   const isValidNumber = (phoneNumberValue: string) => {
     // Regex validates phone numbers in (xxx)xxx-xxxx, xxx-xxx-xxxx, xxxxxxxxxx, and xxx.xxx.xxxx format
-    const regex = /^[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4}$/g;
+    const regex = /^[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,11}$/g;
     if (phoneNumberValue.match(regex)) {
       return true;
     }
@@ -48,17 +51,18 @@ const SendOTPForm = (props: Props): JSX.Element => {
       </p>
       <form onSubmit={onSubmit}>
         <div className={styles.telInput}>
-          <input
+          <Dropdown
             className={styles.flag}
             name="intlCode"
             type="text"
-            value="+1"
+            value="+86"
             readOnly
+            options={["+86"]}
           />
-          <input
+          <InputText
             id={styles.phoneNumber}
             className={styles.phoneNumber}
-            placeholder="(123) 456-7890"
+            placeholder="1388888888"
             value={phoneNumber}
             onChange={onPhoneNumberChange}
             type="tel"
@@ -68,13 +72,14 @@ const SendOTPForm = (props: Props): JSX.Element => {
           By continuing, you consent to receive an SMS for verification. Message
           and data rates may apply.
         </p>
-        <input
+        <Button
           className={styles.primaryButton}
           disabled={isDisabled}
           id="button"
           type="submit"
-          value="Continue"
-        />
+        >
+          Continue
+        </Button>
       </form>
     </div>
   );

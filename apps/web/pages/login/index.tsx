@@ -5,15 +5,15 @@ import {
   StytchProps,
 } from "@stytch/stytch-react";
 import { LoginMethod } from "models";
-import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import LoginEntryPoint from "../../components/login-entry-point";
 import LoginWithSMS from "../../components/login-with-sms";
+import withSession, { ServerSideProps } from "../../utils/with-session";
 import styles from "./index.module.scss";
 
 type Props = {
-  publicToken: string;
+  publicToken?: string;
   user: {
     id: string;
   };
@@ -115,10 +115,16 @@ const Login = (props: Props) => {
   );
 };
 
-const getServerSideProps: GetServerSideProps = async (ctx) => {
-  return {
-    props: {},
+const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
+  // Get the user's session based on the request
+  const user = req.session.get("user") ?? null;
+  const props: Props = {
+    publicToken: stytchProps.publicToken,
+    user,
   };
+  return { props };
 };
+
+export const getServerSideProps = withSession(getServerSidePropsHandler);
 
 export default Login;

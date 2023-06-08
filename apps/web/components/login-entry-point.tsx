@@ -1,4 +1,5 @@
 import { LoginMethod } from "models";
+import { Button } from "primereact/button";
 import styles from "./login-entry-point.module.scss";
 import StytchContainer from "./stytch-container";
 
@@ -10,23 +11,20 @@ const LoginEntryPoint = (props: Props) => {
   const { setLoginMethod } = props;
   return (
     <StytchContainer>
-      <h2>Hello Vercel!</h2>
-      <p className={styles.entrySubHeader}>
-        This example app demonstrates how you can integrate with Stytch using
-        Next.js and deploy on Vercel. Now, let’s get started!
-      </p>
-      <button
+      <h2>Hello!</h2>
+      <p className={styles.entrySubHeader}>登录试用</p>
+      <Button
         className={styles.entryButton}
         onClick={() => setLoginMethod(LoginMethod.SDK)}
       >
         SDK Integration (Email magic links)
-      </button>
-      <button
+      </Button>
+      <Button
         className={styles.entryButton}
         onClick={() => setLoginMethod(LoginMethod.API)}
       >
         API Integration (SMS Passcodes)
-      </button>
+      </Button>
     </StytchContainer>
   );
 };
