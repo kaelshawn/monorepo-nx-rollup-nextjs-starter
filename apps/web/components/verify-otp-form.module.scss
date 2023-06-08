@@ -1,0 +1,47 @@
+.passcodeInputContainer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.resendCodeContainer {
+    margin: 28px 0;
+}
+
+.passcodeContainer {
+    margin-top: 4px;
+}
+
+.errorText {
+    color: red;
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+}
+
+
+.resendCodeText {
+    color: #5c727d;
+    display: inline;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.resendCodeButton {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    height: fit-content;
+    padding: 0;
+    width: fit-content;
+}
+
+.passcodeInput {
+    border-radius: 3px;
+    font-size: 20px;
+    width: 48px;
+    height: 45px;
+    text-align: center;
+}

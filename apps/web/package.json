@@ -1,12 +1,18 @@
 {
   "dependencies": {
+    "@stytch/stytch-react": "^4.1.1",
+    "formik": "^2.4.1",
     "models": "workspace:*",
     "next": "^13.4.1",
+    "next-iron-session": "^4.2.0",
     "primereact": "^9.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sass": "^1.63.0",
+    "stytch": "^7.1.1",
     "ui": "workspace:*",
-    "valtio": "^1.10.5"
+    "valtio": "^1.10.5",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
