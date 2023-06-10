@@ -1,30 +1,39 @@
+import { Stytch, StytchProps } from "@stytch/stytch-react";
 import { LoginMethod } from "models";
-import { Button } from "primereact/button";
+import { TabPanel, TabView } from "primereact/tabview";
 import styles from "./login-entry-point.module.scss";
+import LoginWithSMS from "./login-with-sms";
 import StytchContainer from "./stytch-container";
 
 type Props = {
-  setLoginMethod: (loginMethod: LoginMethod) => void;
+  publicToken?: string;
 };
 
-const LoginEntryPoint = (props: Props) => {
-  const { setLoginMethod } = props;
+const LoginEntryPoint = (props: Props & { stytchProps: StytchProps }) => {
+  const { publicToken, stytchProps } = props;
+
+  const loginMethodMap: Record<LoginMethod, React.ReactElement> = {
+    [LoginMethod.API]: <LoginWithSMS />,
+    [LoginMethod.SDK]: (
+      <div className={styles.container}>
+        <Stytch
+          publicToken={publicToken || ""}
+          loginOrSignupView={stytchProps.loginOrSignupView}
+          style={stytchProps.style}
+          callbacks={stytchProps.callbacks}
+        />
+      </div>
+    ),
+  };
+
   return (
     <StytchContainer>
-      <h2>Hello!</h2>
-      <p className={styles.entrySubHeader}>登录试用</p>
-      <Button
-        className={styles.entryButton}
-        onClick={() => setLoginMethod(LoginMethod.SDK)}
-      >
-        SDK Integration (Email magic links)
-      </Button>
-      <Button
-        className={styles.entryButton}
-        onClick={() => setLoginMethod(LoginMethod.API)}
-      >
-        API Integration (SMS Passcodes)
-      </Button>
+      <TabView>
+        <TabPanel header="短信登录">{loginMethodMap[LoginMethod.API]}</TabPanel>
+        <TabPanel header="邮箱第三方登录">
+          {loginMethodMap[LoginMethod.SDK]}
+        </TabPanel>
+      </TabView>
     </StytchContainer>
   );
 };

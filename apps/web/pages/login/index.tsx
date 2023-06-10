@@ -1,14 +1,11 @@
 import {
   OAuthProvidersTypes,
   SDKProductTypes,
-  Stytch,
   StytchProps,
 } from "@stytch/stytch-react";
-import { LoginMethod } from "models";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import LoginEntryPoint from "../../components/login-entry-point";
-import LoginWithSMS from "../../components/login-with-sms";
 import withSession, { ServerSideProps } from "../../utils/with-session";
 import styles from "./index.module.scss";
 
@@ -47,7 +44,7 @@ const stytchProps: StytchProps = {
       providers: [
         { type: OAuthProvidersTypes.Google },
         { type: OAuthProvidersTypes.Microsoft },
-        { type: OAuthProvidersTypes.Apple },
+        { type: OAuthProvidersTypes.Github },
       ],
     },
   },
@@ -79,9 +76,7 @@ const stytchProps: StytchProps = {
 
 const Login = (props: Props) => {
   const { user, publicToken } = props;
-  const [loginMethod, setLoginMethod] = React.useState<LoginMethod | null>(
-    null
-  );
+
   const router = useRouter();
 
   useEffect(() => {
@@ -90,27 +85,9 @@ const Login = (props: Props) => {
     }
   });
 
-  const loginMethodMap: Record<LoginMethod, React.ReactElement> = {
-    [LoginMethod.API]: <LoginWithSMS />,
-    [LoginMethod.SDK]: (
-      <div className={styles.container}>
-        <Stytch
-          publicToken={publicToken || ""}
-          loginOrSignupView={stytchProps.loginOrSignupView}
-          style={stytchProps.style}
-          callbacks={stytchProps.callbacks}
-        />
-      </div>
-    ),
-  };
-
   return (
     <div className={styles.root}>
-      {loginMethod === null ? (
-        <LoginEntryPoint setLoginMethod={setLoginMethod} />
-      ) : (
-        loginMethodMap[loginMethod]
-      )}
+      <LoginEntryPoint publicToken={publicToken} stytchProps={stytchProps} />
     </div>
   );
 };

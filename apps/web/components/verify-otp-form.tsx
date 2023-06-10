@@ -1,4 +1,6 @@
 import { useRouter } from "next/router";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
 import React from "react";
 import { sendOTP } from "../utils/otp-utils";
 import styles from "./verify-otp-form.module.scss";
@@ -110,7 +112,7 @@ const VerifyOTPForm = (props: Props) => {
     const inputs: JSX.Element[] = [];
     for (let i = 0; i < 6; i += 1) {
       inputs.push(
-        <input
+        <InputText
           autoFocus={i === 0}
           className={styles.passcodeInput}
           id={`digit-${i}`}
@@ -129,10 +131,9 @@ const VerifyOTPForm = (props: Props) => {
 
   return (
     <div>
-      <h2>Enter passcode</h2>
+      <h2>输入验证码</h2>
       <p className={styles.smsInstructions}>
-        A 6-digit passcode was sent to you at{" "}
-        <strong>{parsedPhoneNumber}</strong>.
+        一个6位数的验证码已发送到 <strong>{parsedPhoneNumber}</strong>.
       </p>
       <form onSubmit={onSubmit}>
         <div className={styles.passcodeContainer}>
@@ -144,22 +145,22 @@ const VerifyOTPForm = (props: Props) => {
           </div>
         </div>
         <div className={styles.resendCodeContainer}>
-          <p className={styles.resendCodeText}>Didn’t get it? </p>
-          <button
+          <p className={styles.resendCodeText}>未收到验证码? </p>
+          <Button
             className={`${styles.resendCodeButton} ${styles.resendCodeText}`}
             onClick={resendCode}
             type="button"
           >
-            Resend code
-          </button>
+            重新发送
+          </Button>
         </div>
-        <input
+        <Button
           className={styles.primaryButton}
           disabled={isDisabled}
-          id="button"
           type="submit"
-          value="Continue"
-        />
+        >
+          继续
+        </Button>
       </form>
     </div>
   );
