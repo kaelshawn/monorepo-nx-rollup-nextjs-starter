@@ -95,6 +95,7 @@ const Login = (props: Props) => {
 const getServerSidePropsHandler: ServerSideProps = async ({ req }) => {
   // Get the user's session based on the request
   const user = req.session.get("user") ?? null;
+  debugger;
   const props: Props = {
     publicToken: stytchProps.publicToken,
     user,
