@@ -26,5 +26,8 @@
     "lint": "eslint *.ts*"
   },
   "types": "dist/index.d.ts",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "dependencies": {
+    "@headlessui/react": "^1.7.15"
+  }
 }
