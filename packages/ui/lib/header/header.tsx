@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
-import Logo from "./lib/logo/logo";
-import MobileMenu from "./lib/mobile-menu/mobile-menu";
+import Logo from "../logo/logo";
+import { MobileMenu } from "../mobile-menu/mobile-menu";
+import styles from "./header.module.scss";
 
-export const Header = ({ text }: { text: string }) => {
+/* eslint-disable-next-line */
+export interface HeaderProps {}
+
+export function Header(props: HeaderProps) {
   const [top, setTop] = useState<boolean>(true);
 
   // detect whether user has scrolled the page down by 10px
@@ -20,7 +24,7 @@ export const Header = ({ text }: { text: string }) => {
     <header
       className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${
         !top ? "bg-white backdrop-blur-sm shadow-lg" : ""
-      }`}
+      } ${styles["header"]}`}
     >
       <div className="max-w-6xl mx-auto px-5 sm:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -67,4 +71,6 @@ export const Header = ({ text }: { text: string }) => {
       </div>
     </header>
   );
-};
+}
+
+export default Header;

@@ -1,4 +1,5 @@
 import typescript from "@rollup/plugin-typescript";
+import autoprefixer from "autoprefixer";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
 
@@ -16,6 +17,7 @@ export default {
       extract: false,
       modules: true,
       use: ["sass"],
+      plugins: [autoprefixer()],
     }),
     typescript(),
   ],

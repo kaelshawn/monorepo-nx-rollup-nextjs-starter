@@ -1,5 +1,6 @@
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "../styles/globals.scss";
 
 export default function RootLayout({
   children,
