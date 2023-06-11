@@ -5,13 +5,15 @@
   "scripts": {
     "dev": "nx run-many -t dev",
     "build:all": "nx run-many -t build",
-    "graph":"nx graph"
+    "graph": "nx graph"
   },
   "private": true,
   "dependencies": {
     "lerna": "^6.6.2"
   },
   "devDependencies": {
+    "@nx/next": "^16.3.2",
+    "@nx/react": "^16.3.2",
     "nx": "16.2.2",
     "nx-cloud": "latest"
   }

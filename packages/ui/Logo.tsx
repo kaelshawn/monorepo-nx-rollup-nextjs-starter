@@ -1,4 +1,4 @@
-export const Header = ({ text }: { text: string }) => {
+export const Logo = ({ text }: { text: string }) => {
   return (
     <a href="/" className="block" aria-label="Cruip">
       <svg

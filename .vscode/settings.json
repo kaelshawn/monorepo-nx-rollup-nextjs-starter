@@ -1,11 +1,12 @@
 {
-    "cSpell.words": [
-        "formik",
-        "inputtext",
-        "passcode",
-        "primereact",
-        "stytch",
-        "tabview",
-        "zustand"
-    ]
+  "cSpell.words": [
+    "formik",
+    "inputtext",
+    "passcode",
+    "primereact",
+    "stytch",
+    "tabview",
+    "tailwindcss",
+    "zustand"
+  ]
 }

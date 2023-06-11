@@ -1,4 +1,6 @@
 import typescript from "@rollup/plugin-typescript";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
+import postcss from "rollup-plugin-postcss";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -7,5 +9,14 @@ export default {
     file: "dist/index.js",
     format: "cjs",
   },
-  plugins: [typescript()],
+  external: ["react", "react-dom"],
+  plugins: [
+    peerDepsExternal(),
+    postcss({
+      extract: false,
+      modules: true,
+      use: ["sass"],
+    }),
+    typescript(),
+  ],
 };
