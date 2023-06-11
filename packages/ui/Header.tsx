@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import Logo from "./lib/logo/logo";
+import MobileMenu from "./lib/mobile-menu/mobile-menu";
+
 export const Header = ({ text }: { text: string }) => {
   const [top, setTop] = useState<boolean>(true);
 
@@ -30,15 +34,15 @@ export const Header = ({ text }: { text: string }) => {
             {/* Desktop sign in links */}
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
-                <Link
+                <a
                   href="/signin"
                   className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
                   Sign in
-                </Link>
+                </a>
               </li>
               <li>
-                <Link
+                <a
                   href="/signup"
                   className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3"
                 >
@@ -53,7 +57,7 @@ export const Header = ({ text }: { text: string }) => {
                       fillRule="nonzero"
                     />
                   </svg>
-                </Link>
+                </a>
               </li>
             </ul>
           </nav>
