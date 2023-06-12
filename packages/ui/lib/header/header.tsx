@@ -1,12 +1,23 @@
+import { Dialog } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import Logo from "../logo/logo";
-import { MobileMenu } from "../mobile-menu/mobile-menu";
 import styles from "./header.module.scss";
 
 /* eslint-disable-next-line */
-export interface HeaderProps {}
+export interface HeaderProps {
+  navigation?: Array<{ name: string; href: string }>;
+}
 
-export function Header(props: HeaderProps) {
+export function Header({
+  navigation = [
+    { name: "Product", href: "#" },
+    { name: "Features", href: "#" },
+    { name: "Marketplace", href: "#" },
+    { name: "Company", href: "#" },
+  ],
+}: HeaderProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [top, setTop] = useState<boolean>(true);
 
   // detect whether user has scrolled the page down by 10px
@@ -21,54 +32,91 @@ export function Header(props: HeaderProps) {
   }, [top]);
 
   return (
-    <header
-      className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${
-        !top ? "bg-white backdrop-blur-sm shadow-lg" : ""
-      } ${styles["header"]}`}
-    >
-      <div className="max-w-6xl mx-auto px-5 sm:px-6">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Site branding */}
-          <div className="shrink-0 mr-4">
-            <Logo />
-          </div>
-
-          {/* Desktop navigation */}
-          <nav className="hidden md:flex md:grow">
-            {/* Desktop sign in links */}
-            <ul className="flex grow justify-end flex-wrap items-center">
-              <li>
-                <a
-                  href="/login"
-                  className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
-                >
-                  Sign in
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/login"
-                  className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3"
-                >
-                  <span>Sign up</span>
-                  <svg
-                    className="w-3 h-3 fill-current text-gray-400 shrink-0 ml-2 -mr-1"
-                    viewBox="0 0 12 12"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z"
-                      fillRule="nonzero"
-                    />
-                  </svg>
-                </a>
-              </li>
-            </ul>
-          </nav>
-
-          <MobileMenu />
+    <header className={`absolute inset-x-0 top-0 z-50 ${styles["header"]}`}>
+      <nav
+        className="flex items-center justify-between p-6 lg:px-8"
+        aria-label="Global"
+      >
+        <div className="flex lg:flex-1">
+          <a href="#" className="-m-1.5 p-1.5">
+            <span className="sr-only">Your Company</span>
+            <Logo></Logo>
+          </a>
         </div>
-      </div>
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <span className="sr-only">Open main menu</span>
+            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+          </button>
+        </div>
+        <div className="hidden lg:flex lg:gap-x-12">
+          {navigation.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+            Log in <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </nav>
+      <Dialog
+        as="div"
+        className="lg:hidden"
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+      >
+        <div className="fixed inset-0 z-50" />
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div className="flex items-center justify-between">
+            <a href="#" className="-m-1.5 p-1.5">
+              <span className="sr-only">Your Company</span>
+              <Logo></Logo>
+            </a>
+            <button
+              type="button"
+              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <span className="sr-only">Close menu</span>
+              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="mt-6 flow-root">
+            <div className="-my-6 divide-y divide-gray-500/10">
+              <div className="space-y-2 py-6">
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+              <div className="py-6">
+                <a
+                  href="/login"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Log in
+                </a>
+              </div>
+            </div>
+          </div>
+        </Dialog.Panel>
+      </Dialog>
     </header>
   );
 }

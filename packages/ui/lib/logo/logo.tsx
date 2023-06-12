@@ -3,7 +3,7 @@ export interface LogoProps {}
 
 export function Logo(props: LogoProps) {
   return (
-    <a href="/" className="block" aria-label="Cruip">
+    <a href="/" className="block" aria-label="logo">
       <svg
         className="w-8 h-8"
         viewBox="0 0 32 32"
@@ -18,18 +18,33 @@ export function Logo(props: LogoProps) {
             r="79.941%"
             id="footer-logo"
           >
-            <stop stopColor="#4FD1C5" offset="0%" />
-            <stop stopColor="#81E6D9" offset="25.871%" />
-            <stop stopColor="#338CF5" offset="100%" />
+            <stop stopColor="rgb(247, 245, 207)" offset="0%" />
+            <stop stopColor="rgb(245, 238, 238)" offset="25.871%" />
+            <stop stopColor="#f5ebeb" offset="100%" />
           </radialGradient>
         </defs>
         <rect
           width="32"
           height="32"
-          rx="16"
+          rx="3"
           fill="url(#footer-logo)"
           fillRule="nonzero"
-        />
+        ></rect>
+        <foreignObject width="32" height="32">
+          <div
+            style={{
+              fontSize: 10,
+              color: "#78dfbf",
+              display: "flex",
+              height: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+              fontWeight: "bold",
+            }}
+          >
+            <span>Auth</span>
+          </div>
+        </foreignObject>
       </svg>
     </a>
   );

@@ -8,5 +8,6 @@
     "tabview",
     "tailwindcss",
     "zustand"
-  ]
+  ],
+  "css.customData": [".vscode/tailwind.json"]
 }

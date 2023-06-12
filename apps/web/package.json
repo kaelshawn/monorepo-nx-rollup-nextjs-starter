@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "@stytch/stytch-react": "^4.1.1",
     "aos": "3.0.0-beta.6",
     "formik": "^2.4.1",
