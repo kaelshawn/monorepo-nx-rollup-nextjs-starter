@@ -10,8 +10,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="h-full bg-gray-100">
+      <body className="h-full">
         <Header
           logoContent={
             <Link href="#" className="-m-1.5 p-1.5" passHref>
