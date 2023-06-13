@@ -1,22 +1,16 @@
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
-import Logo from "../logo/logo";
+import React, { useEffect, useState } from "react";
 import styles from "./header.module.scss";
 
 /* eslint-disable-next-line */
 export interface HeaderProps {
-  navigation?: Array<{ name: string; href: string }>;
+  navigation?: React.ReactNode | (() => React.ReactNode);
+  logoContent?: React.ReactNode | (() => React.ReactNode);
+  rightContent?: React.ReactNode | (() => React.ReactNode);
 }
 
-export function Header({
-  navigation = [
-    { name: "Product", href: "#" },
-    { name: "Features", href: "#" },
-    { name: "Marketplace", href: "#" },
-    { name: "Company", href: "#" },
-  ],
-}: HeaderProps) {
+export function Header({ navigation, logoContent, rightContent }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [top, setTop] = useState<boolean>(true);
 
@@ -38,10 +32,7 @@ export function Header({
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
-            <Logo></Logo>
-          </a>
+          {typeof logoContent == "function" ? logoContent() : logoContent}
         </div>
         <div className="flex lg:hidden">
           <button
@@ -54,20 +45,10 @@ export function Header({
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              {item.name}
-            </a>
-          ))}
+          {typeof navigation == "function" ? navigation() : navigation}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          {typeof rightContent == "function" ? rightContent() : rightContent}
         </div>
       </nav>
       <Dialog
@@ -79,10 +60,7 @@ export function Header({
         <div className="fixed inset-0 z-50" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <Logo></Logo>
-            </a>
+            {typeof logoContent == "function" ? logoContent() : logoContent}
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -95,23 +73,12 @@ export function Header({
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    {item.name}
-                  </a>
-                ))}
+                {typeof navigation == "function" ? navigation() : navigation}
               </div>
               <div className="py-6">
-                <a
-                  href="/login"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </a>
+                {typeof rightContent == "function"
+                  ? rightContent()
+                  : rightContent}
               </div>
             </div>
           </div>

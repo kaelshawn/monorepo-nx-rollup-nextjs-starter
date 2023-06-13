@@ -30,7 +30,7 @@ export async function handler(
       });
       // Save additional user data here
       await req.session.save();
-      res.redirect("/profile");
+      res.redirect("/dashboard");
     } catch (error) {
       const errorString = JSON.stringify(error);
       console.log(error);
