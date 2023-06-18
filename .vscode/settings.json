@@ -9,5 +9,6 @@
     "tailwindcss",
     "zustand"
   ],
-  "css.customData": [".vscode/tailwind.json"]
+  "css.customData": [".vscode/tailwind.json"],
+  "prettier.prettierPath": "./node_modules/prettier"
 }
